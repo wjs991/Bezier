@@ -117,7 +117,7 @@ public class Bezier_Curve : MonoBehaviour
     }
     public static float GetApproximateLengthOfCubicCurve(Bezier_point startPoint, Bezier_point endPoint, int sampling)
     {
-        return GetApproximateLengthOfCubicCurve(startPoint.transform.position, endPoint.transform.position, startPoint.sub_handle_1_localposition, endPoint.sub_handle_2_localposition, sampling);
+        return GetApproximateLengthOfCubicCurve(startPoint.transform.position, endPoint.transform.position, startPoint.sub_handle_1, endPoint.sub_handle_2, sampling);
     }    
     public static float GetApproximateLengthOfCubicCurve(Vector3 startPosition, Vector3 endPosition, Vector3 startTangent, Vector3 endTangent, int sampling)
     {
@@ -136,7 +136,7 @@ public class Bezier_Curve : MonoBehaviour
     }
     public static Vector3 GetPointOnCubicCurve(float time, Bezier_point startPoint, Bezier_point endPoint)
     {
-        return GetPointOnCubicCurve(time, startPoint.transform.position, endPoint.transform.position, startPoint.sub_handle_1_localposition, endPoint.sub_handle_2_localposition);
+        return GetPointOnCubicCurve(time, startPoint.transform.position, endPoint.transform.position, startPoint.sub_handle_1, endPoint.sub_handle_2);
     }
     public static Vector3 GetPointOnCubicCurve(float time, Vector3 startPosition, Vector3 endPosition, Vector3 startTangent, Vector3 endTangent)
     {
