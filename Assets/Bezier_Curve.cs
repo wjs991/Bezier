@@ -17,7 +17,7 @@ public class Bezier_Curve : MonoBehaviour
     private int sampling = 25;
 
     [SerializeField]
-    //[HideInInspector]
+    [HideInInspector]
     public List<Bezier_point> point_list = new List<Bezier_point>();
 
     [SerializeField]
@@ -44,9 +44,16 @@ public class Bezier_Curve : MonoBehaviour
         
         newPoint.transform.parent = this.transform;
         newPoint.transform.localRotation = Quaternion.identity;
+        newPoint.bezier_Curve = this.GetComponent<Bezier_Curve>();
 
-       
-        newPoint.transform.position = (point_list[Point_count - 1].transform.position - this.point_list[Point_count - 2].transform.position).normalized + this.point_list[Point_count - 1].transform.position;
+        if(Point_count == 0 || Point_count ==1)
+        {
+            newPoint.transform.localPosition = Vector3.zero;
+        }else
+        {
+            newPoint.transform.position = (point_list[Point_count - 1].transform.position - point_list[Point_count - 2].transform.position).normalized + point_list[Point_count - 1].transform.position;
+        }
+        
             
         point_list.Add(newPoint);
 
@@ -54,15 +61,19 @@ public class Bezier_Curve : MonoBehaviour
     }
 
     public Vector3 GetPoint(float time)
-    {
-        // The evaluated points is between these two points
-        Bezier_point startPoint;
-        Bezier_point endPoint;
-        float timeRelativeToSegment;
+    {   
+        if(time<=1f){
+            Bezier_point startPoint;
+            Bezier_point endPoint;
+            float timeRelativeToSegment;
 
-        this.GetCubicSegment(time, out startPoint, out endPoint, out timeRelativeToSegment);
+            this.GetCubicSegment(time, out startPoint, out endPoint, out timeRelativeToSegment);
 
-        return Bezier_Curve.GetPointOnCubicCurve(timeRelativeToSegment, startPoint, endPoint);
+            return Bezier_Curve.GetPointOnCubicCurve(timeRelativeToSegment, startPoint, endPoint);
+        }else{
+            return point_list[Point_count-1].transform.position;
+        }
+        
     }
 
     public void GetCubicSegment(float time, out Bezier_point startPoint, out Bezier_point endPoint, out float timeRelativeToSegment)

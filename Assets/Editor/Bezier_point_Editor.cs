@@ -13,8 +13,6 @@ public class Bezier_point_Editor : Editor
 
     public static float point_circle_size = RecSize;
     public static float sub_handle_size = CircleSize;
-    [SerializeField]
-    public Bezier_Curve curve_;
 
     private Bezier_point point;
     private SerializedProperty sub_1;
@@ -22,7 +20,6 @@ public class Bezier_point_Editor : Editor
     protected virtual void OnEnable()
     {
         this.point = (Bezier_point)this.target;
-        point.bezier_Curve = curve_;
         sub_1 = this.serializedObject.FindProperty("sub_handle_1_localposition");
         sub_2 = this.serializedObject.FindProperty("sub_handle_2_localposition");
     }
@@ -50,8 +47,8 @@ public class Bezier_point_Editor : Editor
 
     protected virtual void OnSceneGUI()
     {
-        //Bezier_point_Editor.sub_handle_size = Bezier_point_Editor.CircleSize;
-        //Bezier_curve_Editor.DrawPointsSceneGUI(this.point.bezier_Curve, this.point);
+        Bezier_point_Editor.sub_handle_size = Bezier_point_Editor.CircleSize;
+        Bezier_curve_Editor.DrawPointsSceneGUI(this.point.bezier_Curve, this.point);
 
         Bezier_point_Editor.sub_handle_size = Bezier_point_Editor.SphereSize;
         Bezier_point_Editor.DrawPointSceneGUI(this.point, Handles.DotHandleCap, Handles.SphereHandleCap);
