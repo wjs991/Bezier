@@ -38,7 +38,6 @@ public class ship_move : MonoBehaviour
 
     IEnumerator move(bool loop_start)
     {
-        float time = 0;
         action = true;
         if(loop_start)
         {
@@ -84,9 +83,10 @@ public class ship_move : MonoBehaviour
     void Update(){
         switch(look){
             case Look.target :
-                this.transform.rotation = look_target(target.transform , lock_Axie);
+                this.transform.rotation = look_target( target.transform , lock_Axie);
                 break;
             case Look.forward :
+                this.transform.forward = look_tangent(nodes,time);
                 break;
 
         }
@@ -94,7 +94,7 @@ public class ship_move : MonoBehaviour
 
     public Quaternion look_target(Transform target,Lock_axie lock_Axie)
     {
-        Vector3 vec = target.position - this.transform.position;
+        Vector3 vec = this.transform.position - target.position;
         switch(lock_Axie){
             case Lock_axie.x:
                 vec.x = 0;
@@ -113,8 +113,16 @@ public class ship_move : MonoBehaviour
                 break;
 
         }
-        vec.Normalize();
-        Quaternion quaternion = Quaternion.LookRotation(vec);
+        
+        Vector3 Temp_vec = Vector3.Slerp(vec,this.transform.forward,Time.deltaTime);
+        //Temp_vec.Normalize();
+        Quaternion quaternion1 = Quaternion.Lerp(this.transform.rotation , Quaternion.LookRotation(vec,Vector3.up),Time.deltaTime * 2f);
+        Quaternion quaternion = quaternion1;
         return quaternion;
+    }
+
+    public Vector3 look_tangent(Bezier_Curve curve,float timer)
+    {
+        return curve.GetTangent(timer);
     }
 }

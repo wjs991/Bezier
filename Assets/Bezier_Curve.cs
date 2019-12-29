@@ -76,6 +76,22 @@ public class Bezier_Curve : MonoBehaviour
         
     }
 
+    public Vector3 GetTangent(float time)
+    {
+        Bezier_point startPoint = null;
+        Bezier_point endPoint = null;
+        float timeRelativeToSegment;
+
+        
+        if(time<=1f){
+            this.GetCubicSegment(time, out startPoint, out endPoint, out timeRelativeToSegment);
+
+            return Bezier_Curve.GetTangentOnCubicCurve(timeRelativeToSegment, startPoint, endPoint);
+        }else{
+            return Bezier_Curve.GetTangentOnCubicCurve(1f, point_list[0], point_list[Point_count-1]);
+        }
+    }
+
     public void GetCubicSegment(float time, out Bezier_point startPoint, out Bezier_point endPoint, out float timeRelativeToSegment)
     {
         startPoint = null;
@@ -158,15 +174,28 @@ public class Bezier_Curve : MonoBehaviour
         float u3 = u2 * u;
         float t3 = t2 * t;
 
-        Vector3 result =
-            (u3) * startPosition +
-            (3f * u2 * t) * startTangent +
-            (3f * u * t2) * endTangent +
-            (t3) * endPosition;
+        Vector3 result = (u3) * startPosition + (3f * u2 * t) * startTangent + (3f * u * t2) * endTangent + (t3) * endPosition;
 
         return result;
     }
     
+    public static Vector3 GetTangentOnCubicCurve(float time, Bezier_point startPoint,Bezier_point endPoint)
+    {
+        return GetTangentOnCubicCurve(time,startPoint.transform.position,endPoint.transform.position, startPoint.sub_handle_1,endPoint.sub_handle_2);
+    }
+
+
+    public static Vector3 GetTangentOnCubicCurve(float time, Vector3 startPosition, Vector3 endPosition, Vector3 startTangent, Vector3 endTangent)
+    {
+        float t = time;
+        float u = 1f - t;
+        float u2 = u * u;
+        float t2 = t * t;
+
+        Vector3 tangent =  (-u2) * startPosition + (u * (u - 2f * t)) * startTangent + (t * (2f * u - t)) * endTangent + (t2) * endPosition;
+
+        return tangent.normalized;
+    }
      protected virtual void OnDrawGizmos()
         {
             if (this.point_list.Count > 1)
