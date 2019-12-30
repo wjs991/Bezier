@@ -88,13 +88,24 @@ public class ship_move : MonoBehaviour
             case Look.forward :
                 this.transform.forward = look_tangent(nodes,time);
                 break;
-
+            case Look.up :
+                this.transform.forward = Camera.main.transform.up;
+                break;
+            case Look.bottom :
+                this.transform.forward = -Camera.main.transform.up;
+                break;
+            case Look.right :
+                this.transform.forward = Camera.main.transform.right;
+                break;
+            case Look.left :
+                this.transform.forward = -Camera.main.transform.right;
+                break;
         }
     }
 
     public Quaternion look_target(Transform target,Lock_axie lock_Axie)
     {
-        Vector3 vec = this.transform.position - target.position;
+        Vector3 vec = target.position - this.transform.position;
         switch(lock_Axie){
             case Lock_axie.x:
                 vec.x = 0;
@@ -114,8 +125,6 @@ public class ship_move : MonoBehaviour
 
         }
         
-        Vector3 Temp_vec = Vector3.Slerp(vec,this.transform.forward,Time.deltaTime);
-        //Temp_vec.Normalize();
         Quaternion quaternion1 = Quaternion.Lerp(this.transform.rotation , Quaternion.LookRotation(vec,Vector3.up),Time.deltaTime * 2f);
         Quaternion quaternion = quaternion1;
         return quaternion;
