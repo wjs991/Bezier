@@ -38,6 +38,13 @@ public class UI_Controller : MonoBehaviour
         }
     }
     public int now_mod_index;
+
+
+
+
+    public Text Bezier_name;
+    public Text now_length;
+    public Text time;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +58,12 @@ public class UI_Controller : MonoBehaviour
         }
     }
 
-
+    void Update()
+    {
+        Bezier_name.text = ship.nodes.name;
+        time.text = ship.time.ToString();
+        now_length.text = (ship.nodes.GetApproximateLength()*ship.time).ToString();
+    }
     public void nextbtn()
     {
         now_mod_index++;

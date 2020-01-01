@@ -21,7 +21,7 @@ public class ship_move : MonoBehaviour
     public Look look;
     public Lock_axie lock_Axie;
     public Bezier_Curve nodes;
-    float time=0;
+    public float time=0;
 
     public bool action;
 
