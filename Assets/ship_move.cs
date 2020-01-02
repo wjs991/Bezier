@@ -21,14 +21,15 @@ public class ship_move : MonoBehaviour
     public Look look;
     public Lock_axie lock_Axie;
     public Bezier_Curve nodes;
+    public GameObject target;
     public float time=0;
 
-    public bool action;
-
+    
     public float speed;
     public bool loop;
+    private bool action;
 
-    public GameObject target;
+    
 
     void Start()
     {

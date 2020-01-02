@@ -16,6 +16,9 @@ public class Bezier_curve_Editor : Editor
 
     private bool show_point = true;
 
+    private bool length_view = false;
+    private bool color_group = false;
+
     [MenuItem("GameObject/Create Other/Bezier Curve")]
     private static void Create_Bezier_Curve(){
         Bezier_Curve curve = new GameObject("Bezier_Curve",typeof(Bezier_Curve)).GetComponent<Bezier_Curve>();
@@ -48,11 +51,16 @@ public class Bezier_curve_Editor : Editor
 
         this.serializedObject.Update();
 
-        if (GUILayout.Button("Log Length"))
-        {
-            Debug.Log(this.curve.GetApproximateLength());
-        }
 
+
+        this.length_view = EditorGUILayout.Foldout(length_view,"show length");
+        
+        if(length_view)
+        {
+            EditorGUILayout.LabelField("Total Length : ", string.Format("{0}",curve.GetApproximateLength()));
+            EditorGUILayout.LabelField("Now Length : ", string.Format("{0}",curve.GetApproximateLength() * curve.normalizedTime));
+        }
+        
         this.show_point = EditorGUILayout.Foldout(this.show_point, "Key Points");
         if (this.show_point)
         {
@@ -60,13 +68,6 @@ public class Bezier_curve_Editor : Editor
             {
                 AddKeyPointAt(this.curve,this.curve.Point_count);
             }
-
-            if (GUILayout.Button("Add Point and Select"))
-            {
-                var point = AddKeyPointAt(this.curve, this.curve.Point_count);
-                Selection.activeGameObject = point.gameObject;
-            }
-
             this.point_list.DoLayoutList();
         }
 

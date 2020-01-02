@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class Bezier_Curve : MonoBehaviour
 {
-    [SerializeField]
-    private Color curveColor = Color.green;
+    
+    public Color curveColor = Color.red;
 
-    [SerializeField]
-    private Color startPointColor = Color.red;
-
-    [SerializeField]
-    private Color endPointColor = Color.blue;
+    public Color point_color = Color.green;
 
     [SerializeField]
     private int sampling = 25;
@@ -22,7 +18,7 @@ public class Bezier_Curve : MonoBehaviour
 
     [SerializeField]
     [Range(0f, 1f)]
-    float normalizedTime = 0.5f;
+    public float normalizedTime = 0.5f;
 
 
     public int Point_count
@@ -216,16 +212,18 @@ public class Bezier_Curve : MonoBehaviour
                 }
 
                 // Draw the start and the end of the curve indicators
-                Gizmos.color = this.startPointColor;
-                Gizmos.DrawSphere(point_list[0].transform.position, 0.05f);
 
-                Gizmos.color = this.endPointColor;
-                Gizmos.DrawSphere(point_list[Point_count - 1].transform.position, 0.05f);
+                for(int i=0;i<Point_count;i++)
+                {
+                    Gizmos.color = this.point_color;
+                    Gizmos.DrawSphere(point_list[i].transform.position,0.2f);
+                }
+
 
                 // Draw the point at the normalized time
                 Vector3 point = this.GetPoint(this.normalizedTime);
                 Gizmos.color = Color.yellow;
-                Gizmos.DrawSphere(point, 0.025f);
+                Gizmos.DrawSphere(point, 0.2f);
 
                 
             }
