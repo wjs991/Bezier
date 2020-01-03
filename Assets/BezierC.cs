@@ -51,6 +51,23 @@ public class BezierC : MonoBehaviour
 
         A_.transform.position = a_;
         B_.transform.position = b_;
+
+        start_pos.GetComponent<LineRenderer>().SetPosition(0,start_pos.transform.position);
+        start_pos.GetComponent<LineRenderer>().SetPosition(1,second_pos.transform.position);
+
+        second_pos.GetComponent<LineRenderer>().SetPosition(0,second_pos.transform.position);
+        second_pos.GetComponent<LineRenderer>().SetPosition(1,third_pos.transform.position);
+
+        third_pos.GetComponent<LineRenderer>().SetPosition(0,third_pos.transform.position);
+        third_pos.GetComponent<LineRenderer>().SetPosition(1,end_pos.transform.position);
+
+        s_s.GetComponent<LineRenderer>().SetPosition(0,s_s.transform.position);
+        s_s.GetComponent<LineRenderer>().SetPosition(1,s_t.transform.position);
+
+        s_t.GetComponent<LineRenderer>().SetPosition(0,s_t.transform.position);
+        s_t.GetComponent<LineRenderer>().SetPosition(1,t_e.transform.position);
+
+
         A_.GetComponent<LineRenderer>().SetPosition(0,A_.transform.position);
         A_.GetComponent<LineRenderer>().SetPosition(1,B_.transform.position);
 
