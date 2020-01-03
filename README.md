@@ -1,6 +1,6 @@
 # Bezier Curve - Enemy navigation system
 ## Documentation
- You can control the movement of objects in the shooting game. 
+ You can control the movement of objects in unity. 
 ## DEMO  
 ### Editor  
   ![bezier_curve](https://user-images.githubusercontent.com/24996693/71653773-b6398a00-2d71-11ea-90d3-b73e178aea07.gif)
