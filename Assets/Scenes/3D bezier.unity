@@ -2452,6 +2452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 550822169479422587}
   - component: {fileID: 3602791743880024169}
+  - component: {fileID: 3602791743880024170}
   m_Layer: 0
   m_Name: ship_2
   m_TagString: Untagged
@@ -2478,6 +2479,18 @@ MonoBehaviour:
   time: 0
   speed: 0.2
   loop: 1
+--- !u!114 &3602791743880024170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3602791743880024168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735bdfd2869a88f49a3e6010f2c9bea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &4374045687594678245
 MeshRenderer:
   m_ObjectHideFlags: 0
